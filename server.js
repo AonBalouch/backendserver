@@ -7,7 +7,7 @@ import Filter from 'bad-words'
 
 // PUT YOUR ALLOWED DOMAINS THE ACCESS THIS SERVER HERE:
 
-const allowedOrigins = ['http://bbfwriter.com/', 'https://chatgptclient.vercel.app', 'http://localhost']
+const allowedOrigins = [ 'https://gptclone-ten.vercel.app/' , 'https://chatgptclient.vercel.app', 'http://localhost']
 
 const filter = new Filter()
 
