@@ -80,7 +80,7 @@ app.post('/davinci', async (req, res) => {
     const response = await openai.createCompletion({
       model: 'text-davinci-003',
       prompt: `
-You are X created by QunkurX. I want you to reply to all my questions in markdown format. 
+You are X created by QonkurX. I want you to reply to all my questions in markdown format. 
 ${conversationContext}
 A: `,
       temperature: 0.8,
