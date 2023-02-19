@@ -116,86 +116,86 @@ A: `,
   }
 })
 
-// /**
-//  * POST /php
-//  * Returns a response from OpenAI's text completion model only in php code.
-//  */
-// app.post('/php', async (req, res) => {
-//   // Validate request body
-//   if (!req.body.prompt) {
-//     return res.status(400).send({
-//       error: 'Missing required field "prompt" in request body',
-//     })
-//   }
+/**
+ * POST /php
+ * Returns a response from OpenAI's text completion model only in php code.
+ */
+app.post('/php', async (req, res) => {
+  // Validate request body
+  if (!req.body.prompt) {
+    return res.status(400).send({
+      error: 'Missing required field "prompt" in request body',
+    })
+  }
 
-//   try {
-//     // Call OpenAI API
-//     const prompt = req.body.prompt
-//     const cleanPrompt = filter.isProfane(prompt) ? filter.clean(prompt) : prompt
-//     console.log(cleanPrompt)
+  try {
+    // Call OpenAI API
+    const prompt = req.body.prompt
+    const cleanPrompt = filter.isProfane(prompt) ? filter.clean(prompt) : prompt
+    console.log(cleanPrompt)
 
-//     // Add the current prompt to the conversation context
-//     conversationContext += `Q: ${cleanPrompt}\n`
+    // Add the current prompt to the conversation context
+    conversationContext += `Q: ${cleanPrompt}\n`
 
-//     const response = await openai.createCompletion({
-//       model: 'text-davinci-003',
-//       prompt: `
-// Never use normal text instead I want you to reply to all my questions in php code only in markdown format. 
-// ${conversationContext}
-// A: `,
-//       temperature: 0.8,
-//       max_tokens: 2000,
-//       top_p: 0.5,
-//       frequency_penalty: 0.5,
-//       presence_penalty: 0.2,
-//     })
+    const response = await openai.createCompletion({
+      model: 'text-davinci-003',
+      prompt: `
+Never use normal text instead I want you to reply to all my questions in php code only in markdown format. 
+${conversationContext}
+A: `,
+      temperature: 0.8,
+      max_tokens: 2000,
+      top_p: 0.5,
+      frequency_penalty: 0.5,
+      presence_penalty: 0.2,
+    })
 
-//     // Add the response to the conversation context
-//     conversationContext += `A: ${response.data.choices[0].text}\n`
+    // Add the response to the conversation context
+    conversationContext += `A: ${response.data.choices[0].text}\n`
 
-//     console.log(response.data.choices[0].text)
-//     // Return response from OpenAI API
-//     res.status(200).send({
-//       bot: response.data.choices[0].text,
-//       // limit: res.body.limit
-//     })
-//   } catch (error) {
-//     // Log error and return a generic error message
-//     console.error(error)
-//     res.status(500).send({
-//       error: 'Something went wrong',
-//     })
-//   }
-// })
+    console.log(response.data.choices[0].text)
+    // Return response from OpenAI API
+    res.status(200).send({
+      bot: response.data.choices[0].text,
+      // limit: res.body.limit
+    })
+  } catch (error) {
+    // Log error and return a generic error message
+    console.error(error)
+    res.status(500).send({
+      error: 'Something went wrong',
+    })
+  }
+})
 
-// /**
-//  * POST /dalle
-//  * Returns a response from OpenAI's image generation model.
-//  */
-// app.post('/dalle', async (req, res) => {
-//   const prompt = req.body.prompt
+/**
+ * POST /dalle
+ * Returns a response from OpenAI's image generation model.
+ */
+app.post('/dalle', async (req, res) => {
+  const prompt = req.body.prompt
 
-//   try {
-//     const response = await openai.createImage({
-//       prompt: `${prompt}`,
-//       n: 1,
-//       size: "256x256",
-//     })
+  try {
+    const response = await openai.createImage({
+      prompt: `${prompt}`,
+      n: 1,
+      size: "256x256",
+    })
 
-//     console.log(response.data.data[0].url)
-//     res.status(200).send({
-//       bot: response.data.data[0].url,
-//       // limit: res.body.limit,
-//       // limit:15
-//     })
-//   } catch (error) {
-//     // Log error and return a generic error message
-//     console.error(error)
-//     res.status(500).send({
-//       error: 'Something went wrong',
-//     })
-//   }
-// })
+    console.log(response.data.data[0].url)
+    res.status(200).send({
+      bot: response.data.data[0].url,
+      // limit: res.body.limit,
+      // limit:15
+    })
+  } catch (error) {
+    // Log error and return a generic error message
+    console.error(error)
+    res.status(500).send({
+      error: 'Something went wrong',
+    })
+  }
+})
 
 
 
